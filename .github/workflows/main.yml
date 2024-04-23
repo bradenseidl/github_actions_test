@@ -1,0 +1,38 @@
+name: Build and Create Zip
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger-build:
+        description: 'Trigger the build and zip creation'
+        default: 'true'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8'
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Publish
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Create Zip
+      run: |
+        cd publish
+        zip -r test.zip .
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: test
+        path: publish/test.zip
