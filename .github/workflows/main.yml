@@ -26,13 +26,8 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o ./publish
 
-    - name: Create Zip
-      run: |
-        cd publish
-        zip -r test.zip .
-
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: test
-        path: publish/test.zip
+        path: publish/
