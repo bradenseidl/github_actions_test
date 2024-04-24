@@ -6,7 +6,7 @@ on:
       trigger-build:
         description: 'Trigger the build and zip creation'
         default: 'true'
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,12 +26,16 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o ./publish
 
+    - name: Get Commit Hash
+      id: commit_hash
+      run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+      
     - name: Upload Artifact
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: test
+        name: ${{ steps.commit_hash.outputs.hash }}
         path: publish/
 
-    - name: Output artifact ID
+    - name: Output Artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
