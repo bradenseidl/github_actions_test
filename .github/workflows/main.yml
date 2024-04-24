@@ -27,7 +27,11 @@ jobs:
       run: dotnet publish -c Release -o ./publish
 
     - name: Upload Artifact
+      id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
         name: test
         path: publish/
+
+    - name: Output artifact ID
+      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
