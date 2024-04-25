@@ -27,16 +27,12 @@ jobs:
       run: dotnet publish -c Release -o ./publish
 
     - name: Get Commit Hash and Branch Name
-      id: commit_info_file
-      run: |
-        echo '{ "CommitInformation": { "branch": "'$(git rev-parse --abbrev-ref HEAD)'", "commithash": "'$(git rev-parse --short HEAD)'" } }' > version.json
-
-    - name: Get Commit Hash
       id: commit_info
       run: |
         echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
-      
+        echo '{ "CommitInformation": { "branch": "'$(git rev-parse --abbrev-ref HEAD)'", "commithash": "'$(git rev-parse --short HEAD)'" } }' > version.json
+        
     - name: Upload Artifact
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
