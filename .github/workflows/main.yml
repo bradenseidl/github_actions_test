@@ -26,7 +26,7 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o ./publish
 
-    - name: Get Commit Hash and Branch Name
+    - name: Get Commit Hash and Branch Name and Create version.json
       id: commit_info
       run: |
         echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
@@ -40,5 +40,5 @@ jobs:
         name: ${{ env.BRANCH_NAME }}-${{ env.COMMIT_HASH }}
         path: |
           publish/${{ env.BRANCH_NAME }}-${{ env.COMMIT_HASH }}.zip
-          version.json
+          
 
