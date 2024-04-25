@@ -35,9 +35,6 @@ jobs:
 
     - name: Move version.json to publish directory
       run: mv version.json publish/
-
-    - name: Display version.json
-      run: cat version.json
         
     - name: Upload Artifact
       id: artifact-upload-step
