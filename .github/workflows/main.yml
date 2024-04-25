@@ -32,6 +32,9 @@ jobs:
         echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
         echo '{ "CommitInformation": { "branch": "'$(git rev-parse --abbrev-ref HEAD)'", "commithash": "'$(git rev-parse --short HEAD)'" } }' > version.json
+
+    - name: Display version.json
+      run: cat version.json
         
     - name: Upload Artifact
       id: artifact-upload-step
