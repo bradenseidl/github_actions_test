@@ -38,6 +38,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.BRANCH_NAME }}-${{ env.COMMIT_HASH }}
-        path: publish/
+        path: |
+          publish/
+          publish/version.json
           
 
