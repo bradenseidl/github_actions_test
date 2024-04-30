@@ -5,6 +5,15 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+
+
+
+// Configure JSON file provider
+builder.Configuration.AddJsonFile("version.json");
+
+
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
