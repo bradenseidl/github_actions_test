@@ -6,10 +6,6 @@ on:
       trigger-build:
         description: 'Trigger the build and zip creation'
         default: 'true'
-      branch:
-        description: 'Branch to build'
-        required: true
-        default: 'main'
       
 jobs:
   build:
